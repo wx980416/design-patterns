@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1.2_变量的生命周期</title>
+  </head>
+  <body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <script>
+      var func = function () {
+        var a = 1
+        return function () {
+          a++
+          console.log(a) // 闭包结构 变量a的生命被延续了
+        }
+      }
+      var f = func()
+      f() // 2
+      f() // 3
+      f() // 4
+      f() // 5
+
+      // 闭包应用 依次点击div，显示0,1,2....
+      var nodes = document.getElementsByTagName('div')
+      for (var i = 0; i < nodes.length; i++) {
+        ;(function (i) {
+          nodes[i].onclick = function () {
+            console.log(i)
+          }
+        })(i) // 通过闭包将每次变量i的生命延续了
+      }
+
+      // 例子 检测数据类型
+      var Type = {}
+      for (var i = 0, type; (type = ['String', 'Array', 'Number'][i++]); ) {
+        ;(function (type) {
+          Type['is' + type] = function (obj) {
+            return (
+              Object.prototype.toString.call(obj) === '[object ' + type + ']'
+            )
+          }
+        })(type)
+      }
+      console.log(Type.isArray([])) // true
+      console.log(Type.isString('str')) // true
+    </script>
+  </body>
+</html>

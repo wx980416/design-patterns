@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // JavaScript只能通过作用域来实现封装特性
+      var myObject = function () {
+        var _name = 'wangxin' // 私有（private）变量
+        return {
+          // 公开（public）变量
+          getName: function () {
+            return _name
+          },
+        }
+      }
+    </script>
+  </body>
+</html>

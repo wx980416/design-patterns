@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.2.1_函数作为参数传递</title>
+  </head>
+  <body>
+    <script>
+      /* 1.回调函数 */
+      /* 2.Array.prototype.sort */
+      ;[1, 4, 3].sort(function (a, b) {
+        return a - b // 从小到大排列
+      })
+      ;[(1, 4, 3)].sort(function (a, b) {
+        return b - a // 从大到小排列
+      })
+    </script>
+  </body>
+</html>

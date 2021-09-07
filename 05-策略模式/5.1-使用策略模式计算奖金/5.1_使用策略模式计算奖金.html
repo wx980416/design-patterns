@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 策略类：封装算法 S A B
+      const performanceS = function () {}
+      performanceS.prototype.calculate = function (salary) {
+        return salary * 4
+      }
+      const performanceA = function () {}
+      performanceA.prototype.calculate = function (salary) {
+        return salary * 3
+      }
+      const performanceB = function () {}
+      performanceB.prototype.calculate = function (salary) {
+        return salary * 2
+      }
+
+      // 奖金类
+      const Bonus = function () {
+        this.salary = null // 原始工资
+        this.strategy = null // 绩效等级对应的策略对象
+      }
+      Bonus.prototype.setSalary = function (salery) {
+        this.salary = salery // 设置员工的原始工资
+      }
+      Bonus.prototype.setStrategy = function (strategy) {
+        this.strategy = strategy // 设置员工绩效等级对应的策略对象
+      }
+      // 取得奖金金额
+      Bonus.prototype.getBonus = function () {
+        if (!this.strategy) {
+          throw new Error('未设置 strategy 对象')
+        }
+        return this.strategy.calculate(this.salary) // 把计算奖金的操作委托给对应的策略对象
+      }
+
+      const bonus = new Bonus()
+
+      bonus.setSalary(10000) // 设置原始工资
+      bonus.setStrategy(new performanceS()) // 设置策略对象
+      console.log(bonus.getBonus()) // 40000
+
+      bonus.setStrategy(new performanceB()) // 替换策略对象
+      console.log(bonus.getBonus()) // 20000
+
+      bonus.setStrategy(new performanceA()) // 替换策略对象
+      console.log(bonus.getBonus()) // 30000
+    </script>
+  </body>
+</html>

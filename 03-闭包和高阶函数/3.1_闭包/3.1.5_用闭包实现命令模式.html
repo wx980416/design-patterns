@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1.5_用闭包实现命令模式</title>
+  </head>
+  <body>
+    <button id="execute">点击我执行命令</button>
+    <button id="undo">点击我执行命令</button>
+    <script>
+      /* 命令模式 */
+      /* 面向对象版本 */
+      // var Tv = {
+      //   open: function () {
+      //     console.log('打开电视机')
+      //   },
+      //   close: function () {
+      //     console.log('关闭电视机')
+      //   },
+      // }
+
+      // var OpenTvCommand = function (receiver) {
+      //   this.receiver = receiver
+      // }
+
+      // OpenTvCommand.prototype.execute = function () {
+      //   this.receiver.open() // 执行命令，打开电视机
+      // }
+
+      // OpenTvCommand.prototype.undo = function () {
+      //   this.receiver.close() // 执行命令，关闭电视机
+      // }
+
+      // var setCommand = function (command) {
+      //   document.getElementById('execute').onclick = function () {
+      //     command.execute()
+      //   }
+      //   document.getElementById('undo').onclick = function () {
+      //     command.undo()
+      //   }
+      // }
+
+      // setCommand(new OpenTvCommand(Tv))
+
+      /* 闭包版本 */
+      var Tv = {
+        open: function () {
+          console.log('打开电视机')
+        },
+        close: function () {
+          console.log('关闭电视机')
+        },
+      }
+
+      var createCommand = function (receiver) {
+        var execute = function () {
+          return receiver.open()
+        }
+        var undo = function () {
+          return receiver.close()
+        }
+        return {
+          execute: execute,
+          undo: undo,
+        }
+      }
+
+      var setCommand = function (command) {
+        document.getElementById('execute').onclick = function () {
+          command.execute()
+        }
+        document.getElementById('undo').onclick = function () {
+          command.undo()
+        }
+      }
+      setCommand(createCommand(Tv))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.2.1_call和apply的区别</title>
+  </head>
+  <body>
+    <script>
+      // apply 传入带下标的集合
+      var func1 = function (a, b, c) {
+        console.log([a, b, c])
+      }
+      func1.apply(null, [1, 2, 3]) // [1, 2, 3]
+
+      // call 依次传入
+      var func2 = function (a, b, c) {
+        console.log([a, b, c])
+      }
+      func2.call(null, 1, 2, 3) // [1, 2, 3]
+    </script>
+  </body>
+</html>

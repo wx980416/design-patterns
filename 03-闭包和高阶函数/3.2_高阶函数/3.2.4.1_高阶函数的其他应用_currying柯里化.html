@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.2.4.1_高阶函数的其他应用_currying柯里化</title>
+  </head>
+  <body>
+    <script>
+      // 例：计算每月开销
+      var monthlyCost = 0
+      var cost = function (money) {
+        monthlyCost += money
+      }
+      cost(100)
+      cost(200)
+      cost(300)
+      cost(400)
+      console.log(monthlyCost) // 1000
+
+      var cost = (function () {
+        var args = []
+        return function () {
+          if (arguments.length === 0) {
+            var money = 0
+            for (var i = 0, l = args.length; i < l; i++) {
+              money += args[i]
+            }
+            return money // 当const()时才返回最终的钱
+          } else {
+            ;[].push.apply(args, arguments)
+          }
+        }
+      })()
+      cost(100) // 未求值
+      cost(200) // 未求值
+      cost(300) // 未求值
+      cost(400) // 未求值
+      console.log(cost()) // 1000
+    </script>
+  </body>
+</html>

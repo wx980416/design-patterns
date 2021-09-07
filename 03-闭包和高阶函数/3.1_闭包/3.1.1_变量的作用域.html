@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1.1_变量的作用域</title>
+  </head>
+  <body>
+    <script>
+      var func = function () {
+        var a = 1
+        console.log(a) // 1
+      }
+      func()
+      console.log(a) // a is not defined
+
+      // 变量搜索是从内到外的
+      var a = 1
+      var func1 = function () {
+        var b = 2
+        var func2 = function () {
+          var c = 3
+          console.log(b) // 2
+          console.log(a) // 1
+        }
+        func2()
+        console.log(c) // c is not defined
+      }
+      func1()
+    </script>
+  </body>
+</html>

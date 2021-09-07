@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.2.2_函数作为返回值输出</title>
+  </head>
+  <body>
+    <script>
+      /* 1.判断数据类型 */
+      var isString = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object String]'
+      }
+      var isArray = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]'
+      }
+      var isNumber = function (obj) {
+        return Object.prototype.toString.call(obj) === '[object Number]'
+      }
+
+      // 保留不变的部分，把可变的部分封装起来
+      var isType = function (type) {
+        return function (obj) {
+          return Object.prototype.toString.call(obj) === '[object ' + type + ']'
+        }
+      }
+      var isString = isType('String')
+      var isArray = isType('Array')
+      var isNumber = isType('Number')
+      console.log(isArray([1, 2, 3])) // true
+
+      // 批量注册
+      var Type = {}
+      for (var i = 0, type; (type = ['String', 'Array', 'Number'][i++]); ) {
+        ;(function (type) {
+          Type['is' + type] = function (obj) {
+            return (
+              Object.prototype.toString.call(obj) === '[object ' + type + ']'
+            )
+          }
+        })(type)
+      }
+      console.log(Type.isString('wangxin')) // true
+      console.log(Type.isNumber(100000)) // true
+    </script>
+  </body>
+</html>

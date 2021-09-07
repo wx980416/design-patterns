@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var SingLeton = function (name) {
+        this.name = name
+      }
+
+      SingLeton.prototype.getName = function () {
+        console.log(this.name)
+      }
+
+      // 获取 SingLeton 类唯一的对象
+      SingLeton.getInstance = (function () {
+        let instance = null // 标志
+        return function (name) {
+          if (!this.instance) {
+            this.instance = new SingLeton(name)
+          }
+          return this.instance
+        }
+      })()
+
+      var a = SingLeton.getInstance('wangxin1')
+      var b = SingLeton.getInstance('wangxin2')
+
+      console.log(a === b) // true 符合单例模式要求
+    </script>
+  </body>
+</html>

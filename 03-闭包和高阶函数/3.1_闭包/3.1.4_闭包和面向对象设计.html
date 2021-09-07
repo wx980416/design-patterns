@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3.1.4_闭包和面向对象设计</title>
+  </head>
+  <body>
+    <script>
+      /* 闭包 */
+      var extent = function () {
+        var value = 0
+        return {
+          call: function () {
+            value++
+            console.log(value)
+          },
+        }
+      }
+      var extent = extent()
+      extent.call() // 1
+      extent.call() // 2
+      extent.call() // 3
+
+      /* 面向对象写法 */
+      var extentObj = {
+        value: 0,
+        call: function () {
+          this.value++
+          console.log(this.value)
+        },
+      }
+      extentObj.call() // 1
+      extentObj.call() // 2
+      extentObj.call() // 3
+
+      var ExtentObj = function () {
+        this.value = 0
+      }
+      ExtentObj.prototype.call = function () {
+        this.value++
+        console.log(this.value)
+      }
+      var exten = new ExtentObj()
+      exten.call() // 1
+      exten.call() // 2
+      exten.call() // 3
+    </script>
+  </body>
+</html>
