@@ -11,47 +11,47 @@
       var obj = {
         a: 1,
         getA: function () {
-          console.log(this === obj) // true
-          console.log(this.a) // 1
+          console.log(this === obj); // true
+          console.log(this.a); // 1
         },
-      }
-      obj.getA()
+      };
+      obj.getA();
 
       // 2.作为普通函数调用 this指向window对象
-      window.name = 'glbalName'
+      window.name = 'glbalName';
       var getName = function () {
-        return this.name
-      }
-      console.log(getName()) // glbalName
+        return this.name;
+      };
+      console.log(getName()); // glbalName
 
       var myObj = {
         name: 'wangxin',
         getName: function () {
-          return this.name
+          return this.name;
         },
-      }
-      var getName = myObj.getName
-      console.log(getName()) // glbalName
+      };
+      var getName = myObj.getName;
+      console.log(getName()); // glbalName
 
       // 3.构造器调用
       var myClass = function () {
-        this.name = 'wangxin'
-      }
-      var obj = new myClass()
-      console.log(obj.name) // wangxin
+        this.name = 'wangxin';
+      };
+      var obj = new myClass();
+      console.log(obj.name); // wangxin
 
       // 4.Function.prototype.call和Function.prototype.apply调用 动态改变传入函数的this
       var obj1 = {
         name: 'wangxin',
         getName: function () {
-          return this.name
+          return this.name;
         },
-      }
+      };
       var obj2 = {
         name: '王鑫',
-      }
-      console.log(obj1.getName()) // wangxin
-      console.log(obj1.getName.call(obj2)) // 王鑫
+      };
+      console.log(obj1.getName()); // wangxin
+      console.log(obj1.getName.call(obj2)); // 王鑫
     </script>
   </body>
 </html>

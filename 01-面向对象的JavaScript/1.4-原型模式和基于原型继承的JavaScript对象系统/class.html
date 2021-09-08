@@ -2,33 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
     <script>
-      /* ES6 class 语法 */
-      class Animal {
+      class Person {
         constructor(name) {
-          this.name = name
+          this.name = name;
         }
+
         getName() {
-          return this.name
+          return this.name;
         }
       }
 
-      // 继承
-      class Dog extends Animal {
+      class Man extends Person {
         constructor(name) {
-          super(name)
+          super(name);
         }
+
         speak() {
-          return '汪汪汪'
+          return '您好啊';
         }
       }
 
-      var dog = new Dog('小黄')
-      console.log(dog.getName() + 'say:' + dog.speak()) // 小黄say:汪汪汪
+      var wx = new Man('王鑫');
+      console.log(wx.name);
+      console.log(wx.getName());
+      console.log(wx.speak());
     </script>
   </body>
 </html>
