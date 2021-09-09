@@ -15,7 +15,7 @@ var objectNew = function () {
   Constructor = [].shift.call(arguments); // 调用数组的shift方法，取得外部传入的第一个参数，构造器
   obj.__proto__ = Constructor.prototype; // 指向正确的原型
   var res = Constructor.apply(obj, arguments); // 借用外部传入的构造器给obj设置属性
-  // apply 改变传入的this
+  // 调用构造函数，apply 改变传入的this
 
   return typeof res === 'object' ? res : obj; // 保证构造器总是返回一个对象
 };
