@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.1.2_丢失的this</title>
+  </head>
+  <body>
+    <div id="div1">我是一个div</div>
+    <script>
+      // 例子1
+      var obj = {
+        myName: 'seven',
+        getName: function () {
+          return this.myName;
+        },
+      };
+      console.log(obj.getName()); // seven
+      var getName2 = obj.getName;
+      // window.myName = '我是全局对象的myName';
+      console.log(getName2()); // undefined 此时的this作为普通函数被调用指向了window
+
+      // 例子2
+      var getId = function (id) {
+        return document.getElementById(id); // 对象的属性调用，this指向document
+      };
+      getId('div1'); // 可以
+
+      // var getId2 = document.getElementById;
+      // getId2('div1'); // Uncaught TypeError: Illegal invocation 此时作为普通函数调用，this指向window
+
+      // 重新修正document.getElementById方法内部的this
+      document.getElementById = (function (func) {
+        return function () {
+          return func.apply(document, arguments); // this重新指向document
+        };
+      })(document.getElementById);
+      var getId3 = document.getElementById;
+      var div = getId3('div1');
+      console.log(div.id); // div1 这次就不会报错了
+    </script>
+  </body>
+</html>
