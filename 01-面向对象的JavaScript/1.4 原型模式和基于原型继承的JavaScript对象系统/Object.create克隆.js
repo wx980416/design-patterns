@@ -12,10 +12,11 @@ var cloneDogface = Object.create(dogface);
 console.log(cloneDogface.blood);
 console.log(cloneDogface.color);
 
-Object.create =
-  Object.create ||
-  function (obj) {
-    var F = function () {};
-    F.prototype = obj; // 修改函数的原型
-    return new F(); // 返回新的构造函数
-  };
+// Object.create实现原理
+Object.create = function (obj) {
+  var F = function () {};
+  F.prototype = obj; // 修改函数的原型
+  return new F(); // 返回新的构造函数
+};
+var cloneDogface2 = Object.create(dogface);
+console.log(cloneDogface2.blood);

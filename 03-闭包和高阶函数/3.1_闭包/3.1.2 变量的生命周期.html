@@ -19,11 +19,11 @@
           console.log(a) // 闭包结构 变量a的生命被延续了
         }
       }
-      var f = func()
-      f() // 2
-      f() // 3
-      f() // 4
-      f() // 5
+      // var f = func()
+      // f() // 2
+      // f() // 3
+      // f() // 4
+      // f() // 5
 
       // 闭包应用 依次点击div，显示0,1,2....
       var nodes = document.getElementsByTagName('div')
@@ -35,14 +35,19 @@
         })(i) // 通过闭包将每次变量i的生命延续了
       }
 
+      // es6 let
+      // for (let i = 0; i < nodes.length; i++) {
+      //   nodes[i].onclick = function () {
+      //     console.log(i)
+      //   }
+      // }
+
       // 例子 检测数据类型
       var Type = {}
       for (var i = 0, type; (type = ['String', 'Array', 'Number'][i++]); ) {
         ;(function (type) {
           Type['is' + type] = function (obj) {
-            return (
-              Object.prototype.toString.call(obj) === '[object ' + type + ']'
-            )
+            return Object.prototype.toString.call(obj) === '[object ' + type + ']'
           }
         })(type)
       }
