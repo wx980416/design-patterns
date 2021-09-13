@@ -8,35 +8,69 @@
   <body>
     <script>
       // 例：计算每月开销
-      var monthlyCost = 0
-      var cost = function (money) {
-        monthlyCost += money
-      }
-      cost(100)
-      cost(200)
-      cost(300)
-      cost(400)
-      console.log(monthlyCost) // 1000
+      // var monthlyCost = 0
+      // var cost = function (money) {
+      //   monthlyCost += money
+      // }
+      // cost(100)
+      // cost(200)
+      // cost(300)
+      // cost(400)
+      // console.log(monthlyCost) // 1000
 
-      var cost = (function () {
-        var args = []
+      // var cost = (function () {
+      //   var args = []
+      //   return function () {
+      //     if (arguments.length === 0) {
+      //       var money = 0
+      //       // 当const(),传入空值时才计算最终的钱
+      //       for (var i = 0, l = args.length; i < l; i++) {
+      //         money += args[i]
+      //       }
+      //       return money
+      //     } else {
+      //       ;[].push.apply(args, arguments)
+      //     }
+      //   }
+      // })()
+      // cost(100) // 未求值
+      // cost(200) // 未求值
+      // cost(300) // 未求值
+      // cost(400) // 未求值
+      // console.log(cost()) // 1000
+
+      // debugger
+      function currying(fn) {
+        let args = []
         return function () {
           if (arguments.length === 0) {
-            var money = 0
-            for (var i = 0, l = args.length; i < l; i++) {
-              money += args[i]
-            }
-            return money // 当const()时才返回最终的钱
+            return fn.apply(this, args)
           } else {
-            ;[].push.apply(args, arguments)
+            // 有值的时候不求值，进行保存
+            ;[].push.apply(args, arguments) // 或者直接 args.push(arguments)
+            console.log(arguments.callee)
+            return arguments.callee
           }
         }
+      }
+
+      var sum = (function () {
+        var res = 0
+
+        return function () {
+          for (let i = 0, l = arguments.length; i < l; i++) {
+            res += arguments[i]
+          }
+          return res
+        }
       })()
-      cost(100) // 未求值
-      cost(200) // 未求值
-      cost(300) // 未求值
-      cost(400) // 未求值
-      console.log(cost()) // 1000
+
+      var sumCurrying = currying(sum)
+
+      sumCurrying(100)
+      sumCurrying(100)
+      sumCurrying(100)
+      sumCurrying(100)
     </script>
   </body>
 </html>
